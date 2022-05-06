@@ -13,6 +13,8 @@ using UnityEngine.UI;
 
 public class IMDemo : MonoBehaviour
 {
+    public static string groupId = CustomConfigs.groupId;
+
     public Text imText;
     public InputField username;
     public InputField input;
@@ -37,8 +39,8 @@ public class IMDemo : MonoBehaviour
         microText = microBtn.transform.GetChild(0).GetComponent<Text>();
         sendBtn.onClick.AddListener(onSendClick);
         microBtn.onClick.AddListener(onMicroClick);
-        craeteGroupBtn.onClick.AddListener(onCreateClick);
-        joinGroupBtn.onClick.AddListener(onJoinClick);
+        craeteGroupBtn.onClick.AddListener(onCreateGroupClick);
+        joinGroupBtn.onClick.AddListener(onJoinGroupClick);
         getGroupBtn.onClick.AddListener(onGetGroupClick);
         getMsgListBtn.onClick.AddListener(onGetMessageList);
     }
@@ -57,10 +59,10 @@ public class IMDemo : MonoBehaviour
         // TencentIMSDK.SetMsgRevokeCallback(MsgRevokeCallback); // 消息撤回回调
         // TencentIMSDK.SetMsgElemUploadProgressCallback(MsgElemUploadProgressCallback); // 多媒体消息发送进度回调
         TencentIMSDK.SetGroupTipsEventCallback(GroupTipsEventCallback); // 群tips回调
+        TencentIMSDK.GroupGetJoinedGroupList(JoinedListCallback);
         // TencentIMSDK.SetGroupAttributeChangedCallback(GroupAttributeChangedCallback); // 群属性改变
     }
 
-    
     void DealMessage(Message msg)
     {
         var elem = msg.message_elem_array[0];
@@ -86,7 +88,9 @@ public class IMDemo : MonoBehaviour
         sb.AppendLine(text);
         imText.text = sb.ToString();
     }
-    
+
+    #region Callback
+
     private void OnConvCallback(TIMConvEvent conv_event, List<ConvInfo> conv_list, string user_data)
     {
         foreach (var conv in conv_list)
@@ -109,6 +113,12 @@ public class IMDemo : MonoBehaviour
         }
     }
 
+    
+    private void JoinedListCallback(int code, string desc, string data, string user_data)
+    {
+        Debug.Log(desc);
+    }
+
     private void RecvNewMsgCallback(List<Message> message, string user_data)
     {
         Debug.Log("RecvNewMsgCallback");
@@ -118,6 +128,8 @@ public class IMDemo : MonoBehaviour
         }
     }
 
+    #endregion
+    
     #region Button Event
     
     private void onGetMessageList()
@@ -139,7 +151,7 @@ public class IMDemo : MonoBehaviour
             MicrophoneInput.Instance.SaveAudioFile(audioPath, length);
 
             Debug.Log("send sound msg:" + audioPath);
-            var res = IMManager.Instance.SendSoundMessage(audioPath);
+            var res = IMManager.Instance.SendSoundMessage(groupId, audioPath);
             if (res == TIMResult.TIM_SUCC)
             {
                 AddMsgText("录音");
@@ -165,8 +177,7 @@ public class IMDemo : MonoBehaviour
         string userid = index == 0 ? CustomConfigs.user_id1 : CustomConfigs.user_id2;
         string user_sig = index == 0 ? CustomConfigs.user_sig1 : CustomConfigs.user_sig2;
 
-        IMManager.Instance.SetUser(userid,user_sig);
-        var res = IMManager.Instance.Login();
+        var res = IMManager.Instance.Login(userid,user_sig);
         if (res == TIMResult.TIM_SUCC)
         {
             AddMsgText("登录成功");
@@ -190,14 +201,14 @@ public class IMDemo : MonoBehaviour
             Debug.Log("input 文本为空");
             return;
         }
-       var res = IMManager.Instance.SendTextMessage(text);
+       var res = IMManager.Instance.SendTextMessage(groupId, text);
        if (res == TIMResult.TIM_SUCC)
        {
            AddMsgText(text);
        }
     }
 
-    private void onCreateClick()
+    private void onCreateGroupClick()
     {
         var res = IMManager.Instance.GroupCreate("","");
         if (res == TIMResult.TIM_SUCC)
@@ -206,15 +217,24 @@ public class IMDemo : MonoBehaviour
         }
     }
 
-    private void onJoinClick()
+    private void onJoinGroupClick()
     {
-        var res = IMManager.Instance.GroupJoin("");
+        var res = IMManager.Instance.JoinGroup(groupId,"hello");
         if (res == TIMResult.TIM_SUCC)
         {
             AddMsgText("加入群聊成功");
         }
     }
 
+    private void onQuitGroupClick()
+    {
+        var res = IMManager.Instance.QuitGroup(groupId);
+        if (res == TIMResult.TIM_SUCC)
+        {
+            AddMsgText("退出群聊成功");
+        }
+    }
+    
     public void onGetGroupClick()
     {
         var res = IMManager.Instance.GetGroups();

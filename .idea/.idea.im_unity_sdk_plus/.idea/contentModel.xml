@@ -8,17 +8,14 @@
           <e p="Config.cs" t="Include" />
           <e p="TestApi.cs" t="Include" />
         </e>
+        <e p="MicroDemo" t="Include">
+          <e p="MicrophoneInput.cs" t="Include" />
+          <e p="MicroTest.cs" t="Include" />
+        </e>
         <e p="MyDemo" t="Include">
           <e p="CustomConfigs.cs" t="Include" />
           <e p="IMDemo.cs" t="Include" />
           <e p="ImManager.cs" t="Include" />
-          <e p="Microphone" t="Include">
-            <e p="FileUtility.cs" t="Include" />
-            <e p="MicrophoneInput.cs" t="Include" />
-            <e p="MicroTest.cs" t="Include" />
-            <e p="MonoSingleton.cs" t="Include" />
-          </e>
-          <e p="UnityWebRequestManager.cs" t="Include" />
         </e>
         <e p="Plugins" t="Include">
           <e p="IngameDebugConsole" t="Include">
@@ -74,6 +71,11 @@
           <e p="Utils" t="Include">
             <e p="Utils.cs" t="Include" />
           </e>
+        </e>
+        <e p="Utils" t="Include">
+          <e p="FileUtility.cs" t="Include" />
+          <e p="MonoSingleton.cs" t="Include" />
+          <e p="UnityWebRequestManager.cs" t="Include" />
         </e>
       </e>
       <e p="im_unity_sdk_plus.sln" t="IncludeFlat" />

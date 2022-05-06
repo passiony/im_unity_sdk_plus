@@ -13,17 +13,16 @@ using UnityEngine.UI;
 
 public class IMManager : MonoSingleton<IMManager>
 {
-    public static string groupId = CustomConfigs.groupId;
     public static string sdkappid = CustomConfigs.sdk_app_id.ToString();
 
     public static string userid;
     public static string user_sig;
 
 
-    public void SetUser(string id,string sig)
+    void addAsyncDataToConsole(int code, string desc, string json_param, string user_data)
     {
-        userid = id;
-        user_sig = sig;
+        Debug.Log(user_data + "Asynchronous return: " + "code: " + code.ToString() + " desc:" + desc + " json_param: " +
+                  json_param + " ");
     }
     
     public TIMResult Init()
@@ -45,8 +44,11 @@ public class IMManager : MonoSingleton<IMManager>
         return res;
     }
     
-    public TIMResult Login()
+    public TIMResult Login(string id,string sig)
     {
+        userid = id;
+        user_sig = sig;
+        
         // 业务可以替换自己的 sdkappid
         TIMResult res = TencentIMSDK.Login(userid, user_sig, addAsyncDataToConsole);
         Debug.Log("Login:" + res);
@@ -61,7 +63,7 @@ public class IMManager : MonoSingleton<IMManager>
         return res;
     }
     
-    public TIMResult GroupCreate(string gorupId,string groupName)
+    public TIMResult GroupCreate(string groupId,string groupName)
     {
         CreateGroupParam param = new CreateGroupParam();
         param.create_group_param_group_id = groupId;
@@ -76,30 +78,27 @@ public class IMManager : MonoSingleton<IMManager>
         return res;
     }
 
-    public TIMResult GroupJoin(string gorupId)
+    public TIMResult JoinGroup(string groupId, string helloMsg)
     {
-        TIMResult res = TencentIMSDK.GroupJoin(groupId, "hello", addAsyncDataToConsole);
+        TIMResult res = TencentIMSDK.GroupJoin(groupId, helloMsg, addAsyncDataToConsole);
         Debug.Log("GroupJoin:" + res);
         return res;
     }
-
+    
+    public TIMResult QuitGroup(string groupId)
+    {
+        TIMResult res = TencentIMSDK.GroupQuit(groupId, addAsyncDataToConsole);
+        Debug.Log("GroupJoin:" + res);
+        return res;
+    }
+    
     public TIMResult GetGroups()
     {
-        TIMResult res = TencentIMSDK.GroupGetJoinedGroupList(OnGetJoinGroupList);
+        TIMResult res = TencentIMSDK.GroupGetJoinedGroupList(addAsyncDataToConsole);
         Debug.Log("GetGroups:" + res);
         return res;
     }
 
-    private void OnGetJoinGroupList(int code, string desc, string data, string user_data)
-    {
-        Debug.Log(code + " " + desc + " " + data);
-    }
-
-    public void addAsyncDataToConsole(int code, string desc, string json_param, string user_data)
-    {
-        Debug.Log(user_data + "Asynchronous return: " + "code: " + code.ToString() + " desc:" + desc + " json_param: " +
-                  json_param + " ");
-    }
 
     public TIMResult GetMessgeList()
     {
@@ -107,7 +106,7 @@ public class IMManager : MonoSingleton<IMManager>
         return res;
     }
     
-    public TIMResult SendTextMessage(string text)
+    public TIMResult SendTextMessage(string groupId, string text)
     {
         string conv_id = groupId;
         Message message = new Message();
@@ -128,7 +127,7 @@ public class IMManager : MonoSingleton<IMManager>
         return res;
     }
 
-    public TIMResult SendSoundMessage(string path)
+    public TIMResult SendSoundMessage(string groupId, string path)
     {
         string conv_id = groupId;
         Message message = new Message();

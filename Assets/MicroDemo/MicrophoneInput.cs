@@ -9,6 +9,7 @@ public class MicrophoneInput : MonoSingleton<MicrophoneInput>
     private int channels = 1;
     private int lengthSec = 20;
     private int frequency = 44100;
+    private bool isRecoding = false;
 
     void Awake()
     {
@@ -20,14 +21,25 @@ public class MicrophoneInput : MonoSingleton<MicrophoneInput>
         yield return Application.RequestUserAuthorization(UserAuthorization.Microphone);
     }
 
+    public bool IsRecording()
+    {
+        return isRecoding;
+    }
+
+    public bool IsPlaying()
+    {
+        return audioSource.isPlaying;
+    }
+    
     public void StartRecord()
     {
         Debug.Log("开始录音");
 
+        isRecoding = true;
         audioSource.Stop();
         audioSource.loop = false;
         audioSource.mute = true;
-        audioSource.clip = Microphone.Start(null, false, 10, 44100);
+        audioSource.clip = Microphone.Start(null, false, lengthSec, 44100);
         audioSource.Play();
     }
 
@@ -36,6 +48,7 @@ public class MicrophoneInput : MonoSingleton<MicrophoneInput>
         int length = Microphone.GetPosition(null);
         Microphone.End(null);
         audioSource.Stop();
+        isRecoding = false;
         return length;
     }
 
