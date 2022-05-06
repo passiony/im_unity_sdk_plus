@@ -1,0 +1,90 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ContentModelStore">
+    <e p="C:\UnityProjects\TIMSDK\Unity\im_unity_sdk_plus" t="IncludeRecursive">
+      <e p="Assembly-CSharp.csproj" t="IncludeRecursive" />
+      <e p="Assets" t="Include">
+        <e p="Demo" t="Include">
+          <e p="Config.cs" t="Include" />
+          <e p="TestApi.cs" t="Include" />
+        </e>
+        <e p="MyDemo" t="Include">
+          <e p="CustomConfigs.cs" t="Include" />
+          <e p="IMDemo.cs" t="Include" />
+          <e p="ImManager.cs" t="Include" />
+          <e p="Microphone" t="Include">
+            <e p="FileUtility.cs" t="Include" />
+            <e p="MicrophoneInput.cs" t="Include" />
+            <e p="MicroTest.cs" t="Include" />
+            <e p="MonoSingleton.cs" t="Include" />
+          </e>
+          <e p="UnityWebRequestManager.cs" t="Include" />
+        </e>
+        <e p="Plugins" t="Include">
+          <e p="IngameDebugConsole" t="Include">
+            <e p="Android" t="Include">
+              <e p="DebugLogLogcatListener.cs" t="Include" />
+            </e>
+            <e p="Editor" t="Include">
+              <e p="DebugLogManagerEditor.cs" t="Include" />
+              <e p="IngameDebugConsole.Editor.asmdef" t="Include" />
+            </e>
+            <e p="IngameDebugConsole.Runtime.asmdef" t="Include" />
+            <e p="README.txt" t="Include" />
+            <e p="Scripts" t="Include">
+              <e p="CircularBuffer.cs" t="Include" />
+              <e p="Commands" t="Include">
+                <e p="PlayerPrefsCommands.cs" t="Include" />
+                <e p="SceneCommands.cs" t="Include" />
+                <e p="TimeCommands.cs" t="Include" />
+              </e>
+              <e p="ConsoleMethodAttribute.cs" t="Include" />
+              <e p="DebugLogConsole.cs" t="Include" />
+              <e p="DebugLogEntry.cs" t="Include" />
+              <e p="DebugLogIndexList.cs" t="Include" />
+              <e p="DebugLogItem.cs" t="Include" />
+              <e p="DebugLogItemCopyWebGL.cs" t="Include" />
+              <e p="DebugLogManager.cs" t="Include" />
+              <e p="DebugLogPopup.cs" t="Include" />
+              <e p="DebugLogRecycledListView.cs" t="Include" />
+              <e p="DebugLogResizeListener.cs" t="Include" />
+              <e p="DebugsOnScrollListener.cs" t="Include" />
+            </e>
+          </e>
+        </e>
+        <e p="TencentIMSDK" t="Include">
+          <e p="Callback" t="Include">
+            <e p="Callback.cs" t="Include" />
+            <e p="CallbackConvert.cs" t="Include" />
+          </e>
+          <e p="Editor" t="Include">
+            <e p="TencentIMSDKiOSBuildSetting.cs" t="Include" />
+          </e>
+          <e p="Enums" t="Include">
+            <e p="Enums.cs" t="Include" />
+          </e>
+          <e p="Native" t="Include">
+            <e p="NativeSDK.cs" t="Include" />
+          </e>
+          <e p="TencentIMSDK.asmdef" t="Include" />
+          <e p="TencentIMSDK.cs" t="Include" />
+          <e p="Types" t="Include">
+            <e p="Types.cs" t="Include" />
+          </e>
+          <e p="Utils" t="Include">
+            <e p="Utils.cs" t="Include" />
+          </e>
+        </e>
+      </e>
+      <e p="im_unity_sdk_plus.sln" t="IncludeFlat" />
+      <e p="IngameDebugConsole.Editor.csproj" t="IncludeRecursive" />
+      <e p="IngameDebugConsole.Runtime.csproj" t="IncludeRecursive" />
+      <e p="obj" t="ExcludeRecursive" />
+      <e p="Packages" t="ExcludeRecursive" />
+      <e p="Temp\bin" t="ExcludeRecursive" />
+      <e p="TencentIMSDK.csproj" t="IncludeRecursive" />
+    </e>
+    <e p="C:\Users\Gillar\.Rider2019.1\system\extResources" t="IncludeRecursive" />
+    <e p="C:\Users\Gillar\.Rider2019.1\system\resharper-host\local\Transient\ReSharperHost\v191\SolutionCaches\_im_unity_sdk_plus.-2019950415.00" t="ExcludeRecursive" />
+  </component>
+</project>
